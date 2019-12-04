@@ -1,3 +1,3 @@
 module github.com/highsai-eng/garheeland
 
-go 1.13
+require github.com/Equanox/gotron v0.2.23
