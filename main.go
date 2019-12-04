@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 
-	"github.com/lxn/walk"
 	. "github.com/lxn/walk/declarative"
 )
 
@@ -13,19 +12,19 @@ func main() {
 
 	log.Println("starting garheeland...")
 
-	var inTE, outTE *walk.TextEdit
+	//var inTE, outTE *walk.TextEdit
 
 	app := MainWindow{
-		Title:   "Garhee Land",
-		MinSize: Size{Width: 300, Height: 200},
-		Layout:  VBox{},
+		Title:    "Garhee Land",
+		MinSize:  Size{Width: 300, Height: 200},
+		Layout:   VBox{},
 		Children: []Widget{
-			HSplitter{
-				Children: []Widget{
-					TextEdit{AssignTo: &inTE},
-					TextEdit{AssignTo: &outTE, ReadOnly: true},
-				},
-			},
+			//HSplitter{
+			//	Children: []Widget{
+			//		TextEdit{AssignTo: &inTE},
+			//		TextEdit{AssignTo: &outTE, ReadOnly: true},
+			//	},
+			//},
 		},
 	}
 
