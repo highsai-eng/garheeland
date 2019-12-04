@@ -1,35 +1,35 @@
 package main
 
 import (
-	"github.com/Equanox/gotron"
+	"log"
+
+	"github.com/lxn/walk"
+	. "github.com/lxn/walk/declarative"
 )
 
 func main() {
 
-	println("test")
+	defer log.Println("destroy garheeland...")
 
-	// Create a new browser window instance
-	window, err := gotron.New()
-	if err != nil {
-		panic(err)
+	log.Println("starting garheeland...")
+
+	var inTE, outTE *walk.TextEdit
+
+	app := MainWindow{
+		Title:   "Garhee Land",
+		MinSize: Size{Width: 300, Height: 200},
+		Layout:  VBox{},
+		Children: []Widget{
+			HSplitter{
+				Children: []Widget{
+					TextEdit{AssignTo: &inTE},
+					TextEdit{AssignTo: &outTE, ReadOnly: true},
+				},
+			},
+		},
 	}
 
-	// Alter default window size and window title.
-	window.WindowOptions.Width = 1200
-	window.WindowOptions.Height = 980
-	window.WindowOptions.Title = "Gotron"
-
-	// Start the browser window.
-	// This will establish a golang <=> nodejs bridge using websockets,
-	// to control ElectronBrowserWindow with our window object.
-	done, err := window.Start()
-	if err != nil {
-		panic(err)
+	if _, err := app.Run(); err != nil {
+		panic(err.Error())
 	}
-
-	// Open dev tools must be used after window.Start
-	// window.OpenDevTools()
-
-	// Wait for the application to close
-	<-done
 }
