@@ -4,15 +4,11 @@ import (
 	"log"
 	"os"
 
+	"github.com/garheeland/controller"
+	"github.com/garheeland/core"
 	"github.com/lxn/walk"
 	. "github.com/lxn/walk/declarative"
 )
-
-//var mv *walk.MainWindow
-
-type Application struct {
-	*walk.MainWindow
-}
 
 func main() {
 
@@ -20,28 +16,18 @@ func main() {
 
 	log.Println("starting garheeland...")
 
-	app := Application{}
+	app := core.Application{}
+
+	file := controller.File{App: &app}
 
 	var in *walk.TextEdit
 
 	err := MainWindow{
 		AssignTo: &app.MainWindow,
 		Title:    "Garhee Land",
-		Size: Size{
-			Width:  1000,
-			Height: 1000,
-		},
-		MinSize: Size{
-			Width:  300,
-			Height: 200,
-		},
-		MaxSize: Size{
-			Width:  600,
-			Height: 1000,
-		},
-		Layout: HBox{
-			MarginsZero: true,
-		},
+		MinSize:  Size{Width: 300, Height: 200},
+		Size:     Size{Width: 1000, Height: 1000},
+		Layout:   HBox{MarginsZero: true},
 		Children: []Widget{
 			TextEdit{
 				AssignTo: &in,
@@ -72,13 +58,8 @@ func main() {
 				//},
 				Items: []MenuItem{
 					Action{
-						Text: "&終了",
-						OnTriggered: func() {
-							log.Println(in.Text())
-							if err := app.Close(); err != nil {
-								log.Fatalln(err.Error())
-							}
-						},
+						Text:        "&終了",
+						OnTriggered: file.Exit,
 					},
 				},
 			},
