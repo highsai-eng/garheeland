@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/garheeland/controller"
 	"github.com/garheeland/core"
+	"github.com/garheeland/handler"
 	"github.com/lxn/walk"
 	. "github.com/lxn/walk/declarative"
 )
@@ -18,7 +18,7 @@ func main() {
 
 	app := core.Application{}
 
-	file := controller.File{App: &app}
+	file := handler.File{App: &app}
 
 	var in *walk.TextEdit
 
@@ -57,10 +57,20 @@ func main() {
 				//	},
 				//},
 				Items: []MenuItem{
-					Action{
-						Text:        "&終了",
-						OnTriggered: file.Exit,
-					},
+					Action{Text: NewFile, OnTriggered: func() {}},
+					Action{Text: NewWindow, OnTriggered: func() {}},
+					Action{Text: Open, OnTriggered: func() {}},
+					Action{Text: SaveOverride, OnTriggered: func() {}},
+					Action{Text: SaveOverrideAll, OnTriggered: func() {}},
+					Action{Text: SaveNaming, OnTriggered: func() {}},
+					Separator{},
+					Action{Text: SaveAndClose, OnTriggered: func() {}},
+					Action{Text: Close, OnTriggered: func() {}},
+					Action{Text: CloseAndAnonymous, OnTriggered: func() {}},
+					Action{Text: CloseAndOpen, OnTriggered: func() {}},
+					Action{Text: ReOpen, OnTriggered: func() {}},
+
+					Action{Text: Exit, OnTriggered: file.Exit},
 				},
 			},
 			Menu{

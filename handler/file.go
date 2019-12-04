@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	"log"
@@ -8,6 +8,10 @@ import (
 
 type File struct {
 	App *core.Application
+}
+
+func (f *File) Open() {
+
 }
 
 func (f *File) Exit() {
