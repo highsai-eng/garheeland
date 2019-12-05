@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/garheeland/constant"
 	"github.com/garheeland/core"
 	"github.com/garheeland/handler"
 	"github.com/lxn/walk"
@@ -20,22 +21,20 @@ func main() {
 
 	file := handler.File{App: &app}
 
-	var in *walk.TextEdit
-
 	err := MainWindow{
 		AssignTo: &app.MainWindow,
-		Title:    "Garhee Land",
+		Title:    constant.AppName,
 		MinSize:  Size{Width: 300, Height: 200},
 		Size:     Size{Width: 1000, Height: 1000},
 		Layout:   HBox{MarginsZero: true},
 		Children: []Widget{
 			TextEdit{
-				AssignTo: &in,
+				AssignTo: &app.EditTextArea,
 			},
 		},
 		MenuItems: []MenuItem{
 			Menu{
-				Text: File,
+				Text: constant.File,
 				//Items: []MenuItem{
 				//	Action{
 				//		//AssignTo: &openAction,
@@ -57,52 +56,52 @@ func main() {
 				//	},
 				//},
 				Items: []MenuItem{
-					Action{Text: NewFile, OnTriggered: func() {}},
-					Action{Text: NewWindow, OnTriggered: func() {}},
-					Action{Text: Open, OnTriggered: func() {}},
-					Action{Text: SaveOverride, OnTriggered: func() {}},
-					Action{Text: SaveOverrideAll, OnTriggered: func() {}},
-					Action{Text: SaveNaming, OnTriggered: func() {}},
+					Action{Text: constant.NewFile, OnTriggered: func() {}},
+					Action{Text: constant.NewWindow, OnTriggered: func() {}},
+					Action{Text: constant.Open, Shortcut: Shortcut{Modifiers: walk.ModControl, Key: walk.KeyO}, OnTriggered: file.Open},
+					Action{Text: constant.SaveOverride, OnTriggered: func() {}},
+					Action{Text: constant.SaveOverrideAll, OnTriggered: func() {}},
+					Action{Text: constant.SaveNaming, OnTriggered: func() {}},
 					Separator{},
-					Action{Text: SaveAndClose, OnTriggered: func() {}},
-					Action{Text: Close, OnTriggered: func() {}},
-					Action{Text: CloseAndAnonymous, OnTriggered: func() {}},
-					Action{Text: CloseAndOpen, OnTriggered: func() {}},
-					Action{Text: ReOpen, OnTriggered: func() {}},
+					Action{Text: constant.SaveAndClose, OnTriggered: func() {}},
+					Action{Text: constant.Close, OnTriggered: func() {}},
+					Action{Text: constant.CloseAndAnonymous, OnTriggered: func() {}},
+					Action{Text: constant.CloseAndOpen, OnTriggered: func() {}},
+					Action{Text: constant.ReOpen, OnTriggered: func() {}},
 					Separator{},
-					Action{Text: Print, OnTriggered: func() {}},
-					Action{Text: PrintPreview, OnTriggered: func() {}},
-					Action{Text: PrintPageSetting, OnTriggered: func() {}},
+					Action{Text: constant.Print, OnTriggered: func() {}},
+					Action{Text: constant.PrintPreview, OnTriggered: func() {}},
+					Action{Text: constant.PrintPageSetting, OnTriggered: func() {}},
 					Separator{},
-					Action{Text: FileProperty, OnTriggered: func() {}},
-					Action{Text: Browse, OnTriggered: func() {}},
+					Action{Text: constant.FileProperty, OnTriggered: func() {}},
+					Action{Text: constant.Browse, OnTriggered: func() {}},
 					Separator{},
-					Action{Text: RecentlyUsedFiles, OnTriggered: func() {}},
-					Action{Text: RecentlyUsedFolders, OnTriggered: func() {}},
+					Action{Text: constant.RecentlyUsedFiles, OnTriggered: func() {}},
+					Action{Text: constant.RecentlyUsedFolders, OnTriggered: func() {}},
 					Separator{},
-					Action{Text: Exit, OnTriggered: file.Exit},
+					Action{Text: constant.Exit, OnTriggered: file.Exit},
 				},
 			},
 			Menu{
-				Text: Edit,
+				Text: constant.Edit,
 			},
 			Menu{
-				Text: Convert,
+				Text: constant.Convert,
 			},
 			Menu{
-				Text: Search,
+				Text: constant.Search,
 			},
 			Menu{
-				Text: Tool,
+				Text: constant.Tool,
 			},
 			Menu{
-				Text: Setting,
+				Text: constant.Setting,
 			},
 			Menu{
-				Text: Window,
+				Text: constant.Window,
 			},
 			Menu{
-				Text: Help,
+				Text: constant.Help,
 			},
 		},
 	}.Create()
