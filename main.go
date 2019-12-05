@@ -35,39 +35,15 @@ func main() {
 		MenuItems: []MenuItem{
 			Menu{
 				Text: constant.File,
-				//Items: []MenuItem{
-				//	Action{
-				//		//AssignTo: &openAction,
-				//		Text: "&Open",
-				//		//Image:       "../img/open.png",
-				//		Enabled:  Bind("enabledCB.Checked"),
-				//		Visible:  Bind("!openHiddenCB.Checked"),
-				//		Shortcut: Shortcut{walk.ModControl, walk.KeyO},
-				//		//OnTriggered: mw.openAction_Triggered,
-				//	},
-				//	Menu{
-				//		//AssignTo: &recentMenu,
-				//		Text: "Recent",
-				//	},
-				//	Separator{},
-				//	Action{
-				//		Text: "E&xit",
-				//		//OnTriggered: func() { mw.Close() },
-				//	},
-				//},
 				Items: []MenuItem{
 					Action{Text: constant.NewFile, OnTriggered: func() {}},
 					Action{Text: constant.NewWindow, OnTriggered: func() {}},
 					Action{Text: constant.Open, Shortcut: Shortcut{Modifiers: walk.ModControl, Key: walk.KeyO}, OnTriggered: file.Open},
 					Action{Text: constant.SaveOverride, OnTriggered: func() {}},
-					Action{Text: constant.SaveOverrideAll, OnTriggered: func() {}},
-					Action{Text: constant.SaveNaming, OnTriggered: func() {}},
+					Action{Text: constant.SaveNaming, Shortcut: Shortcut{Modifiers: walk.ModControl, Key: walk.KeyO}, OnTriggered: file.SaveNaming},
 					Separator{},
 					Action{Text: constant.SaveAndClose, OnTriggered: func() {}},
-					Action{Text: constant.Close, OnTriggered: func() {}},
-					Action{Text: constant.CloseAndAnonymous, OnTriggered: func() {}},
-					Action{Text: constant.CloseAndOpen, OnTriggered: func() {}},
-					Action{Text: constant.ReOpen, OnTriggered: func() {}},
+					Action{Text: constant.Close, Shortcut: Shortcut{Modifiers: walk.ModControl | walk.ModShift, Key: walk.KeyS}, OnTriggered: file.Close},
 					Separator{},
 					Action{Text: constant.Print, OnTriggered: func() {}},
 					Action{Text: constant.PrintPreview, OnTriggered: func() {}},
@@ -78,8 +54,6 @@ func main() {
 					Separator{},
 					Action{Text: constant.RecentlyUsedFiles, OnTriggered: func() {}},
 					Action{Text: constant.RecentlyUsedFolders, OnTriggered: func() {}},
-					Separator{},
-					Action{Text: constant.Exit, OnTriggered: file.Exit},
 				},
 			},
 			Menu{
