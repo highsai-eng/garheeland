@@ -35,7 +35,7 @@ func main() {
 		},
 		MenuItems: []MenuItem{
 			Menu{
-				Text: "&ファイル",
+				Text: File,
 				//Items: []MenuItem{
 				//	Action{
 				//		//AssignTo: &openAction,
@@ -69,30 +69,40 @@ func main() {
 					Action{Text: CloseAndAnonymous, OnTriggered: func() {}},
 					Action{Text: CloseAndOpen, OnTriggered: func() {}},
 					Action{Text: ReOpen, OnTriggered: func() {}},
-
+					Separator{},
+					Action{Text: Print, OnTriggered: func() {}},
+					Action{Text: PrintPreview, OnTriggered: func() {}},
+					Action{Text: PrintPageSetting, OnTriggered: func() {}},
+					Separator{},
+					Action{Text: FileProperty, OnTriggered: func() {}},
+					Action{Text: Browse, OnTriggered: func() {}},
+					Separator{},
+					Action{Text: RecentlyUsedFiles, OnTriggered: func() {}},
+					Action{Text: RecentlyUsedFolders, OnTriggered: func() {}},
+					Separator{},
 					Action{Text: Exit, OnTriggered: file.Exit},
 				},
 			},
 			Menu{
-				Text: "&編集",
+				Text: Edit,
 			},
 			Menu{
-				Text: "&変換",
+				Text: Convert,
 			},
 			Menu{
-				Text: "&検索",
+				Text: Search,
 			},
 			Menu{
-				Text: "&ツール",
+				Text: Tool,
 			},
 			Menu{
-				Text: "&設定",
+				Text: Setting,
 			},
 			Menu{
-				Text: "&ウィンドウ",
+				Text: Window,
 			},
 			Menu{
-				Text: "&ヘルプ",
+				Text: Help,
 			},
 		},
 	}.Create()
